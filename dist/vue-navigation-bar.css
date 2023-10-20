@@ -23,32 +23,6 @@
   height: auto;
 }
 
-.vnb__brand-image-wrapper {
-  padding-left: 10px;
-}
-.vnb__brand-image-wrapper__link__image {
-  max-height: 30px;
-}
-
-.vnb-image {
-  max-width: 100%;
-  height: auto;
-}
-
-.vnb__collapse-button {
-  cursor: pointer;
-  border: 0;
-  background: transparent;
-  margin-right: 10px;
-}
-.vnb__collapse-button:hover {
-  opacity: 0.75;
-}
-.vnb__collapse-button__image {
-  max-height: 30px;
-  max-width: 30px;
-}
-
 .vnb__menu-options {
   display: flex;
   flex-direction: row;
@@ -66,6 +40,20 @@
 }
 .vnb__menu-options__option:not(:last-child) {
   margin-right: 20px;
+}
+
+.vnb__collapse-button {
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  margin-right: 10px;
+}
+.vnb__collapse-button:hover {
+  opacity: 0.75;
+}
+.vnb__collapse-button__image {
+  max-height: 30px;
+  max-width: 30px;
 }
 
 .vnb__popup {
@@ -207,42 +195,16 @@
   height: auto;
 }
 
-.vnb__menu-options__option__button {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-weight: 400;
-  color: #fff;
-  text-align: center;
-  vertical-align: middle;
-  user-select: none;
-  font-size: 0.9rem;
-  line-height: 1;
-  border-radius: 0.25rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 0.5rem 1rem;
-  transition: background 0.2s ease-in;
+.vnb__brand-image-wrapper {
+  padding-left: 10px;
 }
-.vnb__menu-options__option__button__icon svg {
-  max-height: 16px;
-  max-width: 16px;
-}
-.vnb__menu-options__option__button__icon--left {
-  margin-right: 5px;
-}
-.vnb__menu-options__option__button__icon--right {
-  margin-left: 5px;
+.vnb__brand-image-wrapper__link__image {
+  max-height: 30px;
 }
 
-.vnb-button {
-  background: #007aff;
-}
-.vnb-button:hover {
-  color: #fff;
-  background: #0062cc;
-  text-decoration: none;
+.vnb-image {
+  max-width: 100%;
+  height: auto;
 }
 
 .vnb__menu-options__option__link {
@@ -338,8 +300,87 @@
   border-color: rgba(0, 0, 0, 0.1);
 }
 
+.vnb__menu-options__option__button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  font-size: 0.9rem;
+  line-height: 1;
+  border-radius: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.5rem 1rem;
+  transition: background 0.2s ease-in;
+}
+.vnb__menu-options__option__button__icon svg {
+  max-height: 16px;
+  max-width: 16px;
+}
+.vnb__menu-options__option__button__icon--left {
+  margin-right: 5px;
+}
+.vnb__menu-options__option__button__icon--right {
+  margin-left: 5px;
+}
+
+.vnb-button {
+  background: #007aff;
+}
+.vnb-button:hover {
+  color: #fff;
+  background: #0062cc;
+  text-decoration: none;
+}
+
 .vnb__menu-options__option__spacer {
   width: 30px;
+}
+
+.tippy-box[data-animation=scale][data-placement^=top] {
+  transform-origin: bottom;
+}
+
+.tippy-box[data-animation=scale][data-placement^=bottom] {
+  transform-origin: top;
+}
+
+.tippy-box[data-animation=scale][data-placement^=left] {
+  transform-origin: right;
+}
+
+.tippy-box[data-animation=scale][data-placement^=right] {
+  transform-origin: left;
+}
+
+.tippy-box[data-animation=scale][data-state=hidden] {
+  transform: scale(0.5);
+  opacity: 0;
+}
+
+.tippy-box[data-animation=shift-toward][data-state=hidden] {
+  opacity: 0;
+}
+
+.tippy-box[data-animation=shift-toward][data-state=hidden][data-placement^=top] {
+  transform: translateY(-10px);
+}
+
+.tippy-box[data-animation=shift-toward][data-state=hidden][data-placement^=bottom] {
+  transform: translateY(10px);
+}
+
+.tippy-box[data-animation=shift-toward][data-state=hidden][data-placement^=left] {
+  transform: translateX(-10px);
+}
+
+.tippy-box[data-animation=shift-toward][data-state=hidden][data-placement^=right] {
+  transform: translateX(10px);
 }
 
 .tippy-box[data-animation=perspective][data-placement^=top] {
@@ -394,67 +435,6 @@
   opacity: 0;
 }
 
-.tippy-box[data-animation=scale][data-placement^=top] {
-  transform-origin: bottom;
-}
-
-.tippy-box[data-animation=scale][data-placement^=bottom] {
-  transform-origin: top;
-}
-
-.tippy-box[data-animation=scale][data-placement^=left] {
-  transform-origin: right;
-}
-
-.tippy-box[data-animation=scale][data-placement^=right] {
-  transform-origin: left;
-}
-
-.tippy-box[data-animation=scale][data-state=hidden] {
-  transform: scale(0.5);
-  opacity: 0;
-}
-
-.tippy-box[data-animation=shift-away][data-state=hidden] {
-  opacity: 0;
-}
-
-.tippy-box[data-animation=shift-away][data-state=hidden][data-placement^=top] {
-  transform: translateY(10px);
-}
-
-.tippy-box[data-animation=shift-away][data-state=hidden][data-placement^=bottom] {
-  transform: translateY(-10px);
-}
-
-.tippy-box[data-animation=shift-away][data-state=hidden][data-placement^=left] {
-  transform: translateX(10px);
-}
-
-.tippy-box[data-animation=shift-away][data-state=hidden][data-placement^=right] {
-  transform: translateX(-10px);
-}
-
-.tippy-box[data-animation=shift-toward][data-state=hidden] {
-  opacity: 0;
-}
-
-.tippy-box[data-animation=shift-toward][data-state=hidden][data-placement^=top] {
-  transform: translateY(-10px);
-}
-
-.tippy-box[data-animation=shift-toward][data-state=hidden][data-placement^=bottom] {
-  transform: translateY(10px);
-}
-
-.tippy-box[data-animation=shift-toward][data-state=hidden][data-placement^=left] {
-  transform: translateX(-10px);
-}
-
-.tippy-box[data-animation=shift-toward][data-state=hidden][data-placement^=right] {
-  transform: translateX(10px);
-}
-
 .tippy-box[data-theme~=light] {
   color: #26323d;
   box-shadow: 0 0 20px 4px rgba(154, 161, 177, 0.15), 0 4px 80px -8px rgba(36, 40, 47, 0.25), 0 4px 4px -2px rgba(91, 94, 105, 0.15);
@@ -483,4 +463,24 @@
 
 .tippy-box[data-theme~=light] > .tippy-svg-arrow {
   fill: #fff;
+}
+
+.tippy-box[data-animation=shift-away][data-state=hidden] {
+  opacity: 0;
+}
+
+.tippy-box[data-animation=shift-away][data-state=hidden][data-placement^=top] {
+  transform: translateY(10px);
+}
+
+.tippy-box[data-animation=shift-away][data-state=hidden][data-placement^=bottom] {
+  transform: translateY(-10px);
+}
+
+.tippy-box[data-animation=shift-away][data-state=hidden][data-placement^=left] {
+  transform: translateX(10px);
+}
+
+.tippy-box[data-animation=shift-away][data-state=hidden][data-placement^=right] {
+  transform: translateX(-10px);
 }

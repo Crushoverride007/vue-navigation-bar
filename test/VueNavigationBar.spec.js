@@ -25,7 +25,6 @@ describe('VueNavigationBar.vue', () => {
               isLinkAction: true,
               type: 'link',
               text: 'About',
-              path: '/about',
             },
             {
               type: 'hr',
@@ -33,7 +32,7 @@ describe('VueNavigationBar.vue', () => {
             {
               type: 'link',
               text: 'Locations',
-              path: '/locations',
+              path: { name: 'locations', query: { item: 2 } },
             },
             {
               type: 'link',

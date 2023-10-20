@@ -1,5 +1,5 @@
 import { VueScreenSizeMixin } from 'vue-screen-size';
-import { resolveComponent, openBlock, createElementBlock, Fragment, createElementVNode, renderSlot, normalizeProps, mergeProps, createCommentVNode, createBlock, withCtx, createVNode, normalizeStyle, normalizeClass, createTextVNode, toDisplayString, renderList, withKeys } from 'vue';
+import { resolveComponent, openBlock, createElementBlock, Fragment, createBlock, mergeProps, withCtx, renderSlot, createCommentVNode, createVNode, normalizeStyle, createElementVNode, normalizeClass, createTextVNode, toDisplayString, renderList, withKeys } from 'vue';
 import tippy, { hideAll } from 'tippy.js';
 
 // https://stackoverflow.com/a/2117523/8014660
@@ -20,11 +20,18 @@ var script$8 = {
     },
     path: {
       type: [String, Object],
-      required: true,
+      required: false,
     },
     isLinkAction: {
       type: Boolean,
       required: true,
+    },
+  },
+  computed: {
+    localPath: function localPath() {
+      if (!this.path) { return; }
+
+      return typeof this.path === 'string' ? this.path : Object.assign({}, this.path);
     },
   },
 };
@@ -35,34 +42,24 @@ function render$8(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = resolveComponent("router-link");
 
   return (openBlock(), createElementBlock(Fragment, null, [
-    createElementVNode("template", null, [
-      ($props.isLinkAction)
-        ? renderSlot(_ctx.$slots, "content", normalizeProps(mergeProps({ key: 0 }, _ctx.$attrs)))
-        : createCommentVNode("v-if", true)
-    ]),
-    ($props.isUsingVueRouter)
-      ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
-          ($props.path.name)
-            ? (openBlock(), createBlock(_component_router_link, mergeProps({ key: 0 }, _ctx.$attrs, {
-                to: {name: this.path.name}
-              }), {
-                default: withCtx(function () { return [
-                  renderSlot(_ctx.$slots, "content")
-                ]; }),
-                _: 3 /* FORWARDED */
-              }, 16 /* FULL_PROPS */, ["to"]))
-            : (openBlock(), createBlock(_component_router_link, mergeProps({ key: 1 }, _ctx.$attrs, {
-                to: {path: this.path}
-              }), {
-                default: withCtx(function () { return [
-                  renderSlot(_ctx.$slots, "content")
-                ]; }),
-                _: 3 /* FORWARDED */
-              }, 16 /* FULL_PROPS */, ["to"]))
-        ], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */))
-      : (openBlock(), createElementBlock("a", mergeProps({ key: 1 }, _ctx.$attrs, { href: $props.path }), [
+    ($props.isUsingVueRouter && $props.path)
+      ? (openBlock(), createBlock(_component_router_link, mergeProps({ key: 0 }, _ctx.$attrs, { to: $options.localPath }), {
+          default: withCtx(function () { return [
+            renderSlot(_ctx.$slots, "content")
+          ]; }),
+          _: 3 /* FORWARDED */
+        }, 16 /* FULL_PROPS */, ["to"]))
+      : createCommentVNode("v-if", true),
+    (!$props.isUsingVueRouter && !$props.isLinkAction && $props.path)
+      ? (openBlock(), createElementBlock("a", mergeProps({ key: 1 }, _ctx.$attrs, { href: $props.path }), [
           renderSlot(_ctx.$slots, "content")
         ], 16 /* FULL_PROPS */, _hoisted_1$7))
+      : createCommentVNode("v-if", true),
+    ($props.isLinkAction)
+      ? (openBlock(), createElementBlock("a", mergeProps({ key: 2 }, _ctx.$attrs, { href: "javascript:void(0);" }), [
+          renderSlot(_ctx.$slots, "content")
+        ], 16 /* FULL_PROPS */))
+      : createCommentVNode("v-if", true)
   ], 64 /* STABLE_FRAGMENT */))
 }
 
@@ -406,7 +403,7 @@ function render$4(_ctx, _cache, $props, $setup, $data, $options) {
         key: 0,
         path: $props.option.path,
         isUsingVueRouter: $props.options.isUsingVueRouter,
-        class: "vnb__menu-options__option__link",
+        class: normalizeClass(['vnb__menu-options__option__link', $props.option.class]),
         "aria-label": $props.option.text,
         tabindex: "0",
         isLinkAction: $props.option.isLinkAction ? true : false,
@@ -430,10 +427,10 @@ function render$4(_ctx, _cache, $props, $setup, $data, $options) {
             : createCommentVNode("v-if", true)
         ]; }),
         _: 1 /* STABLE */
-      }, 8 /* PROPS */, ["path", "isUsingVueRouter", "aria-label", "isLinkAction"]))
+      }, 8 /* PROPS */, ["path", "isUsingVueRouter", "class", "aria-label", "isLinkAction"]))
     : (openBlock(), createElementBlock("span", {
         key: 1,
-        class: "vnb__menu-options__option__link",
+        class: normalizeClass(['vnb__menu-options__option__link', $props.option.class]),
         id: 'dropdown-menu-parent-' + $props.option.id,
         "aria-haspopup": "true",
         "aria-expanded": $options.isExpanded ? 'true' : 'false',
@@ -520,7 +517,7 @@ _ctx.$emit('vnb-item-clicked', subOption.text);
               ])
             ], 8 /* PROPS */, _hoisted_9$1))
           : createCommentVNode("v-if", true)
-      ], 8 /* PROPS */, _hoisted_3$1))
+      ], 10 /* CLASS, PROPS */, _hoisted_3$1))
 }
 
 script$4.render = render$4;
@@ -602,10 +599,11 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
             (option.type === 'link')
               ? (openBlock(), createBlock(_component_desktop_menu_item_link, {
                   key: 0,
+                  class: normalizeClass(option.class),
                   option: option,
                   options: $props.options,
                   onVnbItemClicked: $options.vnbItemClicked
-                }, null, 8 /* PROPS */, ["option", "options", "onVnbItemClicked"]))
+                }, null, 8 /* PROPS */, ["class", "option", "options", "onVnbItemClicked"]))
               : (option.type === 'button')
                 ? (openBlock(), createBlock(_component_desktop_menu_item_button, {
                     key: 1,
@@ -638,20 +636,20 @@ var script$1 = {
       required: true,
     },
   },
-  data: function data () {
+  data: function data() {
     return {};
   },
   computed: {
-    combinedMenuItems: function combinedMenuItems () {
+    combinedMenuItems: function combinedMenuItems() {
       var combinedArray = this.options.menuOptionsLeft.concat(this.options.menuOptionsRight);
       return combinedArray;
     },
   },
   methods: {
-    closeButtonClicked: function closeButtonClicked () {
+    closeButtonClicked: function closeButtonClicked() {
       this.$emit('close-button-clicked');
     },
-    itemSelected: function itemSelected (option) {
+    itemSelected: function itemSelected(option) {
       this.$emit('vnb-item-clicked', option.text);
       this.closeButtonClicked();
     },
@@ -659,9 +657,7 @@ var script$1 = {
   components: {
     DynamicLink: script$8,
   },
-  emits: [
-    'close-button-clicked',
-    'vnb-item-clicked' ]
+  emits: ['close-button-clicked', 'vnb-item-clicked'],
 };
 
 var _hoisted_1$1 = {
@@ -737,7 +733,7 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
                   width: "100pt",
                   xmlns: "http://www.w3.org/2000/svg",
                   class: "vnb__popup__top__close-button__image",
-                  style: normalizeStyle({fill: $props.options.collapseButtonCloseColor})
+                  style: normalizeStyle({ fill: $props.options.collapseButtonCloseColor })
                 }, _hoisted_8, 4 /* STYLE */))
           ], 8 /* PROPS */, _hoisted_4)
         ]),
@@ -797,7 +793,7 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
                             class: "vnb__popup__bottom__sub-menu-options__option__link",
                             onClick: function ($event) { return ($options.itemSelected(subOption)); },
                             "aria-label": subOption.text,
-                            isLinkAction: option.isLinkAction ? true : false
+                            isLinkAction: subOption.isLinkAction ? true : false
                           }, {
                             content: withCtx(function () { return [
                               createTextVNode(toDisplayString(subOption.text) + " ", 1 /* TEXT */),
